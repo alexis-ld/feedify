@@ -1,13 +1,20 @@
 'use strict';
 
+var config = {
+  apiUrl: "http://romain-zanchi.com:4498/api/"
+};
+
 // Declare app level module which depends on views, and components
-var app = angular.module('feedify', [
+var feedify = angular.module('feedify', [
     'ngResource',
     'ngCookies',
     'ngAnimate',
     'ui.router',
     'ui.bootstrap',
+    'vcRecaptcha',
     'feedify.menu',
+    'feedify.signup',
+    'feedify.signin',
     'feedify.view1',
     'feedify.view2',
     'myApp.version'
@@ -39,16 +46,16 @@ var app = angular.module('feedify', [
         })
         .state('signup', {
             url: "/signup",
-            //templateUrl: 'components/signup/signup.html',
-            //controller: "SignupCtrl",
+            templateUrl: 'signup/signupView.html',
+            controller: "SignUpCtrl",
             data: {
                 requireLogin: false
             }
         })
-        .state('login', {
-            url: "/login",
-            //templateUrl: 'components/login/login.html',
-            //controller: "LoginCtrl",
+        .state('signin', {
+            url: "/signin",
+            templateUrl: 'signin/signinView.html',
+            controller: "SignInCtrl",
             data: {
                 requireLogin: false
             }
