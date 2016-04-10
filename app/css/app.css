@@ -28,3 +28,19 @@
   content: "";
   padding: 0;
 }
+
+
+.lobster {
+  font-family: 'Lobster', cursive;
+}
+
+.monts {
+  font-family: 'Montserrat', sans-serif;
+}
+
+img.logo {
+  float: left;
+  height: 50px;
+  margin: 10px;
+  margin-left: 20px;
+}
