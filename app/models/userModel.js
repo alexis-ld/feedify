@@ -4,11 +4,11 @@ feedify.factory('UserModel', ['$resource',
         return $resource(config.apiUrl, {}, {
             signUp: {
                 method: "POST",
-                url: config.apiUrl+"register"
+                url: config.apiUrl+"/register"
             },
             signIn: {
                 method: "POST",
-                url: config.apiUrl+"login"
+                url: config.apiUrl+"/login"
             }
         });
     }
