@@ -5,10 +5,16 @@ angular.module('feedify.apphome', [])
     .controller('AppHomeCtrl', ['$scope', 'FeedModel', '$rootScope', '$cookies', '$http', '$state', '$window', '$sce',
         function($scope, FeedModel, $rootScope, $cookies, $http, $state, $window, $sce) {
 
+          $scope.currentPage = 1;
+
+          $scope.$watch('currentPage', function(newValue, oldValue) {
+            refresh();
+          })
+
 
             function refresh() {
                 FeedModel.getArticles({
-                        page: 1
+                        page: $scope.currentPage
                     },
                     function(data) {
                         $scope.articles = data.articles;

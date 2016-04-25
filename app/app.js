@@ -15,6 +15,7 @@ var feedify = angular.module('feedify', [
     'vcRecaptcha',
     'feedify.menu',
     'feedify.apphome',
+    'feedify.appdetail',
     'feedify.signup',
     'feedify.signin',
     'feedify.view1',
@@ -77,6 +78,12 @@ var feedify = angular.module('feedify', [
             url: "/app/home",
             templateUrl: "apphome/apphomeView.html",
             controller: "AppHomeCtrl"
-        });
+        })
+        .state('app.detail', {
+            url: "/app/detail/:id",
+            templateUrl: "appdetail/appdetailView.html",
+            controller: "AppDetailCtrl"
+        })
+        ;
 
 }]);
