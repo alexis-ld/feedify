@@ -38,6 +38,7 @@ angular.module('feedify.signin', [])
 
                     },
                     function(data) {
+                        $scope.showError = true;
                         console.log(data);
                     });
             };
