@@ -9,6 +9,7 @@ angular.module('feedify.menu', [])
             $scope.logout = function() {
                 $cookies.remove('userToken');
                 $cookies.remove('userUsername');
+                $cookies.remove('userInfos');
                 $rootScope.userToken = null;
                 $rootScope.userUsername = null;
                 $state.go('signin');
@@ -20,8 +21,14 @@ angular.module('feedify.menu', [])
                     controller: 'AddFeedModalCtrl'
                         //size: size
                 });
-                modalInstance.result.then(function() {
-                  refresh();
+                modalInstance.result.then(function(data) {
+                  console.log(data);
+                  FeedModel.updateFeedWorker({id: data.id}, function(data) {
+                    console.log(data);
+                    refresh();
+                  }, function(data) {
+                    console.log(data);
+                  });
                 }, function() {
                 });
             };
@@ -50,7 +57,7 @@ angular.module('feedify.menu', [])
 
             $scope.addFeed = function() {
                 FeedModel.addFeed($scope.feed, function(data) {
-                    $uibModalInstance.close('ok');
+                    $uibModalInstance.close(data);
                 }, function(data) {
                     console.log(data);
                 });

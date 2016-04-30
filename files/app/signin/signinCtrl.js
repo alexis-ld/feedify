@@ -31,7 +31,18 @@ angular.module('feedify.signin', [])
 
                             $rootScope.userToken = data.token;
                             $rootScope.userUsername = $scope.user.username;
-                            $state.go('app.home');
+
+                            UserModel.getUser({username: $scope.user.username}, function(data) {
+                              console.log(data);
+                              $cookies.putObject("userInfos", data, {
+                                  expires: exp
+                              });
+                              $state.go('app.home');
+                            }, function(data) {
+                              console.log(data);
+                            });
+
+
 
 
                         }

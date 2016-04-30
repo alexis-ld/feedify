@@ -1,7 +1,8 @@
 'use strict';
 
 var config = {
-    apiUrl: "http://romain-zanchi.com:4498/api"
+    apiUrl: "http://romain-zanchi.com:4498/api",
+    apiPort: "4498"
 };
 
 // Declare app level module which depends on views, and components
@@ -16,12 +17,15 @@ var feedify = angular.module('feedify', [
     'feedify.menu',
     'feedify.apphome',
     'feedify.appdetail',
+    'feedify.appsetup',
     'feedify.signup',
     'feedify.signin',
     'feedify.view1',
     'feedify.view2',
     'myApp.version'
-]).run(function($rootScope, $state, $cookies, $http) {
+]).run(function($rootScope, $state, $cookies, $http, $location) {
+  //config.apiUrl = $location.protocol() + "://" + $location.host() + ":" + config.apiPort;
+
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
         if (!$rootScope.userToken) {
@@ -33,6 +37,12 @@ var feedify = angular.module('feedify', [
                 var userUsername = $cookies.getObject('userUsername');
                 $rootScope.userUsername = userUsername;
 
+            }
+        }
+        if (!$rootScope.userInfos) {
+            var userInfosCookie = $cookies.getObject('userInfos');
+            if (typeof userInfosCookie != 'undefined') {
+                $rootScope.userInfos = userInfosCookie;
             }
         }
         if (requireLogin && typeof $rootScope.userToken === 'undefined') {
@@ -79,11 +89,15 @@ var feedify = angular.module('feedify', [
             templateUrl: "apphome/apphomeView.html",
             controller: "AppHomeCtrl"
         })
+        .state('app.setup', {
+            url: "/app/setup",
+            templateUrl: "appsetup/appsetupView.html",
+            controller: "AppSetupCtrl"
+        })
         .state('app.detail', {
             url: "/app/detail/:id",
             templateUrl: "appdetail/appdetailView.html",
             controller: "AppDetailCtrl"
-        })
-        ;
+        });
 
 }]);
