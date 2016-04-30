@@ -20,8 +20,6 @@ var feedify = angular.module('feedify', [
     'feedify.appsetup',
     'feedify.signup',
     'feedify.signin',
-    'feedify.view1',
-    'feedify.view2',
     'myApp.version'
 ]).run(function($rootScope, $state, $cookies, $http, $location) {
   //config.apiUrl = $location.protocol() + "://" + $location.host() + ":" + config.apiPort;
